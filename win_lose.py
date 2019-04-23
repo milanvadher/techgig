@@ -7,7 +7,7 @@ def compare_array(v, h, n):
 
 def main():
     t = int(input())
-    for i in range(1, t + 1):
+    for _ in range(t):
         n = int(input())
         v = list(map(int, input().split()))
         h = list(map(int, input().split()))
