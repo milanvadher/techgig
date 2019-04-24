@@ -1,25 +1,29 @@
 def choose_ans(tickets, t):
-    if tickets[t] <= 0 or tickets[t + 2] <= 0:
+    if tickets[t] < 0 or tickets[t + 2] < 0:
         if tickets[t] > 0:
             return tickets[t]
         elif tickets[t + 2] > 0:
             return tickets[t + 2]
+    else:
+        if tickets[t + 2] == 0 or tickets[t] == 0:
+            if tickets[t + 2] == 0 and tickets[t] == 0:
+                return None
+            elif tickets[t + 2] == 0:
+                return tickets[t]
+            elif tickets[t] == 0:
+                return tickets[t + 2]
         else:
             return str(tickets[t + 2]) + str(tickets[t])
-    else:
-        return str(tickets[t + 2]) + str(tickets[t])
 
 
 def calculate_result(tickets, n):
     temp_ans = []
     for i in range(n - 2):
-        if tickets[i] <= 0 or tickets[i + 2] <= 0:
+        if tickets[i] < 0 or tickets[i + 2] < 0:
             if tickets[i] > 0:
                 temp_ans.append(tickets[i])
             elif tickets[i + 2] > 0:
                 temp_ans.append(tickets[i + 2])
-            else:
-                temp_ans.append(tickets[i] + tickets[i + 2])
         else:
             temp_ans.append(tickets[i] + tickets[i + 2])
 
@@ -32,11 +36,16 @@ def calculate_result(tickets, n):
         for _ in range(temp_ans.count(max(temp_ans))):
             temp_index.append(next(g))
         for j in temp_index:
-            temp_ans_.append((choose_ans(tickets, j)))
+            ans = choose_ans(tickets, j)
+            if ans is not None:
+                temp_ans_.append(ans)
         temp = []
+        first_letter = []
         for k in temp_ans_:
             temp.append(k[0])
-        return temp_ans_[temp.index(max(temp))]
+        for item in temp_ans_:
+            first_letter.append(item[0])
+        return temp_ans_[first_letter.index(max(first_letter))]
     else:
         return choose_ans(tickets, t)
 
