@@ -1,3 +1,21 @@
+def find_max_sum(arr):
+    # Function to return max sum such that
+    # no two elements are adjacent
+    incl = 0
+    excl = 0
+
+    for i in arr:
+        # Current max excluding i (No ternary in Python)
+        new_excl = excl if excl > incl else incl
+
+        # Current max including i
+        incl = excl + i
+        excl = new_excl
+
+    # return max of incl and excl
+    return excl if excl > incl else incl
+
+
 def main():
     # test case
     t = int(input())
@@ -7,9 +25,7 @@ def main():
         # tickets for each houses
         tickets = list(map(int, input().split()))
         print(n, tickets)
-        tickets_sum = []
-        _temp = []
-        print(sum(tickets))
+        print(find_max_sum(tickets))
 
 
 if __name__ == '__main__':
