@@ -5,8 +5,13 @@ def find_max_sum(arr):
     excl = 0
 
     for i in arr:
-        # Current max excluding i (No ternary in Python)
+        # Current max excluding i
         new_excl = excl if excl > incl else incl
+
+        if new_excl is not excl:
+            print(new_excl, excl)
+        else:
+            print(new_excl)
 
         # Current max including i
         incl = excl + i
